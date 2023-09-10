@@ -149,6 +149,12 @@ body {
   opacity: 0.8;
 }
 
+@media (max-width:800px) {
+  .pizzas{
+    grid-template-columns: 1fr;
+  }
+}
+
 /* *************** */
 
 .footer {

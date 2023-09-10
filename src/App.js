@@ -13,7 +13,7 @@ const pizzaData = [
     ingredients: "Tomato and mozarella",
     price: 10,
     photoName: "pizzas/margherita.jpg",
-    soldOut: false,
+    soldOut: true,
   },
   {
     name: "Pizza Spinaci",
@@ -68,12 +68,14 @@ function Menu() {
   // const isPizzasAvailable = [];
   const isPizzasAvailable = pizzaData;
   const numPizza = isPizzasAvailable.length;
-  console.log(numPizza);
+  // console.log(numPizza);
 
   return (
 
     <main className="menu">
       <h2> OUR MENU </h2>
+
+      <p>Authentic Italian cusine. 6 creative dishes to choose from. All from our stone oven, all orgaginc, all delicious</p>
 
       {numPizza > 0 ?  (
         <ul className="pizzas">
@@ -93,14 +95,19 @@ function Menu() {
   )
 }
 
-function Pizza(props) {
+// Destructing Props and directly using them in the code.
+function Pizza({pizzaObj}) {
+  // console.log(pizzaObj);
   return (
-    <li className="pizza">
-      <img src={props.pizzaObj.photoName} alt="{props.pizzaObj.name}" />
+    <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : " "}`}>
+      <img src={pizzaObj.photoName} alt="{pizzaObj.name}" />
       <div>
-        <h3>{props.pizzaObj.name}</h3>
-        <p> {props.pizzaObj.ingredients} </p>
-        <span> Price : ${props.pizzaObj.price} </span>
+        <h3>{pizzaObj.name}</h3>
+        <p> {pizzaObj.ingredients} </p>
+
+        {/* {pizzaObj.soldOut ? <span>SOLD OUT</span> : <span> Price : ${pizzaObj.price} </span>} */}
+
+        <span> {pizzaObj.soldOut ? "SOLD OUT" : `Price : ${pizzaObj.price}`} </span>
       </div>
 
     </li>
@@ -111,7 +118,7 @@ function Footer() {
 
   const hour = new Date().getHours();
   const openHour = 1;
-  const closeHour = 2;
+  const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
 
   return (
